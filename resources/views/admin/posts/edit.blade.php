@@ -20,20 +20,19 @@
       <input type="string" class="form-control" name="title" id="titolo" value="{{$post->title}}" aria-describedby="emailHelp">
     </div>
     <div class="mb-3">
-        <label for="categorie">Choose a car:</label>
-        <select name="category_id" id="categorie">
-        <option value="">--Seleziona una categoria--</option>
-        @foreach($categories as $category)
-            <option value="{{$category->id}}" 
-                @if($category->id == old('category_id', $post->category->id))
-                    selected
-                @endif
-            >{{$category->name}}</option>
-
-        @endforeach
-
-        </select>
-    </div>
+                <label for="category" class="form-label">Categoria</label>
+                <select name="category_id" id="category" class="form-control">
+                <option value="">- Select a category -</option>
+                    @foreach($categories as $category)
+                        <option value="{{$category->id}}"
+                            @if($category->id == old('category_id', $post->category_id)) selected
+                            @endif>
+                
+                        {{$category->name}}
+                        </option>
+                    @endforeach
+                </select>
+            </div>
 
     <div class="mb-3">
         <label for="">Scegli tags</label>
@@ -50,7 +49,7 @@
     
             @endforeach
         </div>
-    
+    </div>
     <div class="form-floating mb-3">
         <textarea class="form-control" name="content" placeholder="Leave a comment here" id="floatingTextarea2" style="height: 100px">{{$post->content}}</textarea>
     </div>
