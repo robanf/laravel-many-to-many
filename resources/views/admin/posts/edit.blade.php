@@ -23,17 +23,34 @@
         <label for="categorie">Choose a car:</label>
         <select name="category_id" id="categorie">
         <option value="">--Seleziona una categoria--</option>
-        @foreach($categories as $item)
-            <option value="{{$item->id}}" 
-                @if($item->id == old('category_id', $post->category->id))
+        @foreach($categories as $category)
+            <option value="{{$category->id}}" 
+                @if($category->id == old('category_id', $post->category->id))
                     selected
                 @endif
-            >{{$item->name}}</option>
+            >{{$category->name}}</option>
 
         @endforeach
 
         </select>
     </div>
+
+    <div class="mb-3">
+        <label for="">Scegli tags</label>
+        <div class="mb-3 d-flex">
+            @foreach($tags as $tag)
+            <div class="mx-2">
+                <input type="checkbox" id="tag{{$loop->iteration}}" name="tags[]" value="{{$tag->id}}"
+                @if($post->tags->contains($tag->id))
+                    checked
+                @endif
+                >
+                <label for="tag{{$loop->iteration}}">{{$tag->name}}</label>
+            </div>    
+    
+            @endforeach
+        </div>
+    
     <div class="form-floating mb-3">
         <textarea class="form-control" name="content" placeholder="Leave a comment here" id="floatingTextarea2" style="height: 100px">{{$post->content}}</textarea>
     </div>
