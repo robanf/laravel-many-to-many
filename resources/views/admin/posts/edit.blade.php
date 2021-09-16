@@ -40,8 +40,10 @@
             @foreach($tags as $tag)
             <div class="mx-2">
                 <input type="checkbox" id="tag{{$loop->iteration}}" name="tags[]" value="{{$tag->id}}"
-                @if($post->tags->contains($tag->id))
-                    checked
+                @if($post->tags->contains( $tag->id )) 
+                checked 
+                @elseif(in_array($tag->id, old('tags', [])))
+                checked 
                 @endif
                 >
                 <label for="tag{{$loop->iteration}}">{{$tag->name}}</label>
